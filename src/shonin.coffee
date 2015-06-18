@@ -10,7 +10,7 @@
 #   Shintaro Morikawa <sntr92@gmail.com>
 
 module.exports = (robot) ->
-  robot.respond /承認( (me)| (.+))?/i, (msg) ->
+  robot.respond /承認( (me)| @(.+))?/i, (msg) ->
     shonins = [
       '最高!!!!フゥ〜〜〜〜〜!!!!',
       'お疲れ様です!!!!飲みましょう!!!!:beers:',
@@ -28,6 +28,7 @@ module.exports = (robot) ->
     if !msg.match[1]
       msg.send shonin
     else if msg.match[2]
-      msg.reply shonin
+      username = msg.message.user.name
+      msg.send "<@#{username}>: #{shonin}"
     else if msg.match[3]
-      msg.send "#{msg.match[3]}: #{shonin}"
+      msg.send "<@#{msg.match[3]}>: #{shonin}"
