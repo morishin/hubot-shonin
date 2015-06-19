@@ -10,6 +10,8 @@
 #   Shintaro Morikawa <sntr92@gmail.com>
 
 module.exports = (robot) ->
+  isUsingSlack = robot.adapterName is 'slack'
+
   robot.respond /承認( (me)| (.+))?/i, (msg) ->
     shonins = [
       '最高!!!!フゥ〜〜〜〜〜!!!!',
@@ -28,6 +30,16 @@ module.exports = (robot) ->
     if !msg.match[1]
       msg.send shonin
     else if msg.match[2]
-      msg.reply shonin
+      if isUsingSlack
+        username = msg.message.user.name
+        msg.send "<@#{username}>: #{shonin}"
+      else
+        msg.reply shonin
     else if msg.match[3]
-      msg.send "#{msg.match[3]}: #{shonin}"
+      recipient = msg.match[3]
+      if isUsingSlack and recipient[0] is '@'
+        # mentions user when the first letter is '@'
+        message = "<#{recipient}>: #{shonin}"
+      else
+        message = "#{recipient}: #{shonin}"
+      msg.send message
