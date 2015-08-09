@@ -19,6 +19,10 @@ Then add **hubot-shonin** to your `external-scripts.json`:
 ## Sample Interaction
 
 ```
-you>> hubot 承認 me
+you>> hubot 承認
 hubot>> 最高!!!!フゥ〜〜〜〜〜!!!!
 ```
+
+### Slack
+<img src="https://i.gyazo.com/39125f49490d7112aefb61112e43bf0a.gif" width="400" />
+
